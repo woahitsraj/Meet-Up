@@ -3,7 +3,6 @@ var eventCreateView = {
     controler.init();
     var form = $("#eventForm");
     form.on( "submit", function( event ) {
-        event.preventDefault();
         var meetupEvent = {
         };
         $(this).serializeArray().map(function(x){meetupEvent[x.name] = x.value;});

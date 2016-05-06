@@ -5,9 +5,11 @@ var eventView ={
   },
 
   render: function () {
-    var eventViewArea = $('#eventViewArea');
+    var eventViewRow = $('#eventViewArea');
     var events = controler.getEvents();
     for (var meetupEvent in events) {
+      var eventViewArea = $('<div class="col-md-6"></div>');
+      eventViewRow.append(eventViewArea);
       var eventName = $('<h3> Event name: ' + events[meetupEvent].name + '</h2>');
       var eventType = $('<p> Event type: ' + events[meetupEvent].type + '</p>');
       var eventHost = $('<p> Event host: ' + events[meetupEvent].host + '</p>');
@@ -22,6 +24,10 @@ var eventView ={
       eventViewArea.append(eventEnd);
       eventViewArea.append(eventAttendees);
       eventViewArea.append(eventAddress);
+      if (events[meetupEvent].message !== undefined) {
+        var eventMessage = $('<p> Event message: ' + events[meetupEvent].message + '</p>');
+        eventViewArea.append(eventMessage);
+      }
       eventViewArea.append('<hr>');
     }
   }

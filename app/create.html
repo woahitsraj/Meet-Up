@@ -40,15 +40,20 @@
       <form id="eventForm">
         <div class="form-group">
           <label for="eventName">What do you want to call your event?</label>
-          <input class="form-control" name="name" id="eventName" placeholder="Enter an event name" required autofocus>
+          <input class="form-control" name="name" id="eventName" type="text" placeholder="Enter an event name" required autofocus>
         </div>
         <div class="form-group">
           <label for="eventType">What type of event do you want to host?</label>
-          <input class="form-control" name="type" id="eventType" placeholder="Enter an event type" required>
+          <input class="form-control" list="eventTypes" name="type" type="text" id="eventType" placeholder="Enter an event type" required>
+          <datalist id="eventTypes">
+            <option value="Birthday">
+            <option value="Wedding">
+            <option value="Party">
+          </datalist>
         </div>
         <div class="form-group">
           <label for="eventHost">Who is hosting?</label>
-          <input class="form-control" name="host" id="eventHost" placeholder="Enter an event host" required>
+          <input class="form-control" name="host" id="eventHost" type="text" placeholder="Enter an event host" required autocomplete="name">
         </div>
         <div class="form-group">
           <label for="eventStart">What time is the event starting?</label>
@@ -60,12 +65,16 @@
         </div>
         <div class="form-group">
           <label for="eventAttendees">Who is attending?</label>
-          <input class="form-control" name="attendees" id="eventAttendees" multiple>
+          <input class="form-control" name="attendees" id="eventAttendees" type="text" multiple required>
           <small class="text-muted">Separate names with commas.</small>
         </div>
         <div class="form-group">
           <label for="eventAddress">Where is this event happening?</label>
           <input class="form-control" name="address" id="eventAddress" type="text" autocomplete="shipping street-address" placeholder="Eg. 123 Any Street, CA 12345" required>
+        </div>
+        <div class="form-group">
+          <label for="eventMessage">Write an optional message to the guests with additional information about the event</label>
+          <input class="form-control" type="text" name="message" id="eventMessage" placeholder="Write a message!">
         </div>
         <button  id="submit" type="submit" class="btn btn-primary">Create Event</button>
       </form>
