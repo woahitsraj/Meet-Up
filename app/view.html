@@ -31,44 +31,14 @@
     <div class="header">
       <ul class="nav nav-pills pull-right">
         <li><a href="index.html">Register</a></li>
-        <li class="active"><a href="#">Create an Event</a></li>
-        <li><a href="view.html">View Events</a></li>
+        <li><a href="create.html">Create an Event</a></li>
+        <li class="active"><a href="#">View Events</a></li>
       </ul>
       <h3 class="text-muted">Meet Up</h3>
     </div>
 
-      <form id="eventForm">
-        <div class="form-group">
-          <label for="eventName">What do you want to call your event?</label>
-          <input class="form-control" name="name" id="eventName" placeholder="Enter an event name" required autofocus>
-        </div>
-        <div class="form-group">
-          <label for="eventType">What type of event do you want to host?</label>
-          <input class="form-control" name="type" id="eventType" placeholder="Enter an event type" required>
-        </div>
-        <div class="form-group">
-          <label for="eventHost">Who is hosting?</label>
-          <input class="form-control" name="host" id="eventHost" placeholder="Enter an event host" required>
-        </div>
-        <div class="form-group">
-          <label for="eventStart">What time is the event starting?</label>
-          <input class="form-control" name="start" id="eventStart" type="datetime-local" required>
-        </div>
-        <div class="form-group">
-          <label for="eventEnd">What time is the event ending?</label>
-          <input class="form-control" name="end" id="eventEnd" type="datetime-local" required>
-        </div>
-        <div class="form-group">
-          <label for="eventAttendees">Who is attending?</label>
-          <input class="form-control" name="attendees" id="eventAttendees" multiple>
-          <small class="text-muted">Separate names with commas.</small>
-        </div>
-        <div class="form-group">
-          <label for="eventAddress">Where is this event happening?</label>
-          <input class="form-control" name="address" id="eventAddress" type="text" autocomplete="shipping street-address" placeholder="Eg. 123 Any Street, CA 12345" required>
-        </div>
-        <button  id="submit" type="submit" class="btn btn-primary">Create Event</button>
-      </form>
+    <div class="row" id="eventViewArea">
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -103,7 +73,6 @@
 
       <!-- build:js scripts/main.js -->
       <script src="scripts/main.js"></script>
-      <script src="scripts/create.js"></script>
       <!-- endbuild -->
     </body>
     </html>
