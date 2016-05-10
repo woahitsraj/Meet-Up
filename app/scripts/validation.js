@@ -42,12 +42,12 @@ emailInput.addEventListener('change', function(){
   }
   var emailInputIssues = emailIssuesTracker.retrieve();
   if (emailInputIssues !== '') {
-    $('#first').addClass('valid');
+    $('#email').addClass('valid');
   }
   else {
-    $('#first').addClass('invalid');
+    $('#email').addClass('invalid');
   }
-  firstPasswordInput.setCustomValidity(emailInputIssues);
+  emailInput.setCustomValidity(emailInputIssues);
 
 
 });
@@ -101,7 +101,7 @@ secondPasswordInput.addEventListener('change', function(){
   var secondPassword = secondPasswordInput.value;
   var firstPassword = firstPasswordInput.value;
   var secondInputIssuesTracker = new IssueTracker();
-  $('#first').addClass('dirty');
+  $('#second').addClass('dirty');
   if (firstPassword === secondPassword && firstPassword.length > 0) {
     /*
     They match, so make sure the rest of the requirements have been met.
