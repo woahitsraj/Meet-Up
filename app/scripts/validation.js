@@ -1,6 +1,6 @@
 var firstPasswordInput = document.querySelector('#first');
 var secondPasswordInput = document.querySelector('#second');
-var submit = document.querySelector('#submit');
+var emailInput = document.querySelector('#email');
 
 function IssueTracker() {
   this.issues = [];
@@ -26,27 +26,32 @@ IssueTracker.prototype = {
   }
 };
 
-submit.onclick = function () {
-  /*
-  Don't forget to grab the input's .value!
-   */
+emailInput.addEventListener("change", function(){
+  var email = emailInput.value;
+  var emailIssuesTracker = new IssueTracker();
+  $('#email').addClass('dirty');
+  if(!email.match(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i)) {
+    emailIssuesTracker.add('Please enter a valid email adddress');
+  }
+  var emailInputIssues = emailIssuesTracker.retrieve();
+  if (emailInputIssues !== "") {
+    $('#first').addClass('valid');
+  }
+  else {
+    $('#first').addClass('invalid');
+  }
+  firstPasswordInput.setCustomValidity(emailInputIssues);
+
+
+});
+
+firstPasswordInput.addEventListener("change",function(){
   var firstPassword = firstPasswordInput.value;
-  var secondPassword = secondPasswordInput.value;
-
-  /*
-  Make an issue tracker for each input because some validation messages should
-  end up on the first one, some on the second.
-   */
   var firstInputIssuesTracker = new IssueTracker();
-  var secondInputIssuesTracker = new IssueTracker();
-  /*
-  This steps through all of the requirements and adds messages when a requirement fails.
-  Just checks the first password because the second should be the same when it runs.
-   */
-  function checkRequirements() {
+  $('#first').addClass('dirty');
 
-    if (firstPassword.length < 16) {
-      firstInputIssuesTracker.add("fewer than 16 characters");
+    if (firstPassword.length < 6) {
+      firstInputIssuesTracker.add("fewer than 6 characters");
     } else if (firstPassword.length > 100) {
       firstInputIssuesTracker.add("greater than 100 characters");
     }
@@ -73,34 +78,35 @@ submit.onclick = function () {
         firstInputIssuesTracker.add("includes illegal character: " + illegalChar);
       });
     }
-  }
+    var firstInputIssues = firstInputIssuesTracker.retrieve();
+    if (firstInputIssues !== "") {
+      $('#first').addClass('valid');
+    }
+    else {
+      $('#first').addClass('invalid');
+    }
+    firstPasswordInput.setCustomValidity(firstInputIssues);
+});
 
-  /*
-  Here's the first validation check. Gotta make sure they match.
-   */
+secondPasswordInput.addEventListener("change",function(){
+  var secondPassword = secondPasswordInput.value;
+  var secondInputIssuesTracker = new IssueTracker();
+  $('#first').addClass('dirty');
   if (firstPassword === secondPassword && firstPassword.length > 0) {
     /*
     They match, so make sure the rest of the requirements have been met.
      */
-    checkRequirements();
   } else {
     secondInputIssuesTracker.add("Passwords must match!");
   }
-
-  /*
-  Get the validation message strings after all the requirements have been checked.
-   */
-  var firstInputIssues = firstInputIssuesTracker.retrieve();
   var secondInputIssues = secondInputIssuesTracker.retrieve();
-  /*
-  Let input.setCustomValidity() do its magic :)
-   */
+  if (secondInputIssues !== "") {
+    $('#second').addClass('valid');
+  }
+  else {
+    $('#second').addClass('invalid');
+  }
   firstPasswordInput.setCustomValidity(firstInputIssues);
   secondPasswordInput.setCustomValidity(secondInputIssues);
-  /*
-  You would probably replace this with a POST message in a real app.
-   */
-  if (firstInputIssues.length + secondInputIssues.length === 0) {
-    alert("Login successful!");
-  }
-};
+
+});

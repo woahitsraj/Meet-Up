@@ -39,14 +39,18 @@
 
       <form>
         <div class="form-group">
+          <label for="name">Please enter your name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" required autofocus autocomplete="name">
+        </div>
+        <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter email" required autofocus autocomplete="email">
+          <input type="email" class="form-control" id="email" placeholder="Enter email" required  autocomplete="email">
           <small class="text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label for="first">Password</label>
           <input type="password" class="form-control" id="first" placeholder="Password" required>
-          <small class="text-muted">Password must be at least 16 characters and contain one number one uppercase letter and one symbol.</small>
+          <small class="text-muted">Password must be at least 6 characters and contain one number one uppercase letter and one symbol.</small>
         </div>
         <div class="form-group">
           <label for="second">Please re-enter your password</label>
