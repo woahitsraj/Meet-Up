@@ -1,10 +1,14 @@
-var eventView ={
+/*global controler $:true*/
+/*eslint no-undef: "error"*/
+
+var eventView = {
   init: function() {
-    controler.init();
+    'use strict';
     eventView.render();
   },
 
   render: function () {
+    'use strict';
     var eventViewRow = $('#eventViewArea');
     var events = controler.getEvents();
     for (var meetupEvent in events) {

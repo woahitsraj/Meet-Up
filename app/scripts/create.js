@@ -1,14 +1,16 @@
+/*global controler $:true*/
+/*eslint no-undef: "error"*/
 
 var eventCreateView = {
   init: function() {
-    controler.init();
+    'use strict';
     var form = $('#eventForm');
     var eventStarDate = $('#eventStart');
     var eventEndDate = $('#eventEnd');
     var dateInputIssues = '';
     eventEndDate.on('change', function(){
       eventEndDate.addClass('dirty');
-      if (Date.parse(eventEndDate.val())<Date.parse(eventStarDate.val())) {
+      if (Date.parse(eventEndDate.val()) < Date.parse(eventStarDate.val())) {
         dateInputIssues = 'Please enter an end date after the start date';
       }
       else {
@@ -26,7 +28,7 @@ var eventCreateView = {
     form.on( 'submit', function() {
         var meetupEvent = {
         };
-        $(this).serializeArray().map(function(x){meetupEvent[x.name] = x.value;});
+        $(this).serializeArray().map(function(x){meetupEvent[x.name] = x.value; });
         controler.addNewEvent(meetupEvent);
       });
   }
