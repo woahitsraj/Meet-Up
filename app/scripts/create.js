@@ -8,7 +8,7 @@ var eventCreateView = {
     var eventStarDate = $('#eventStart');
     var eventEndDate = $('#eventEnd');
     var dateInputIssues = '';
-    eventEndDate.on('change', function(){
+    var eventValidation = function(){
       eventEndDate.addClass('dirty');
       if (Date.parse(eventEndDate.val()) < Date.parse(eventStarDate.val())) {
         dateInputIssues = 'Please enter an end date after the start date';
@@ -24,7 +24,9 @@ var eventCreateView = {
       }
       document.querySelector('#eventEnd').setCustomValidity(dateInputIssues);
 
-    });
+    };
+    eventEndDate.on('change', eventValidation);
+    eventStarDate.on('change', eventValidation);
     form.on( 'submit', function() {
         var meetupEvent = {
         };
