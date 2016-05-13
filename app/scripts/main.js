@@ -1,5 +1,31 @@
 /*global $:true*/
 /*eslint no-undef: "error"*/
+var model = {
+  events: [
+
+  ]
+};
+
+var controler = {
+  init: function() {
+    'use strict';
+      model.events = JSON.parse(localStorage.getItem('events'));
+  },
+
+  getEvents: function() {
+    'use strict';
+      return model.events;
+  },
+
+  addNewEvent: function(event) {
+    'use strict';
+      model.events.push(event);
+      localStorage.setItem('events', JSON.stringify(model.events));
+  }
+};
+
+controler.init();
+
 var eventCreateView = {
   init: function() {
     'use strict';
@@ -27,8 +53,7 @@ var eventCreateView = {
     eventEndDate.on('change', eventValidation);
     eventStarDate.on('change', eventValidation);
     form.on( 'submit', function() {
-        var meetupEvent = {
-        };
+        var meetupEvent = {};
         $(this).serializeArray().map(function(x){meetupEvent[x.name] = x.value; });
         controler.addNewEvent(meetupEvent);
       });
@@ -75,9 +100,9 @@ var eventView = {
 eventView.init();
 
 
-var firstPasswordInput = document.querySelector('#first');
-var secondPasswordInput = document.querySelector('#second');
-var emailInput = document.querySelector('#email');
+var firstPasswordInput = $('#first');
+var secondPasswordInput = $('#second');
+var emailInput = $('#email');
 
 function IssueTracker() {
   'use strict';
@@ -106,32 +131,31 @@ IssueTracker.prototype = {
   }
 };
 
-emailInput.addEventListener('change', function(){
+emailInput.on('change', function(){
   'use strict';
-  var email = emailInput.value;
+  var email = emailInput.val();
   var emailIssuesTracker = new IssueTracker();
-  $('#email').addClass('dirty');
+  emailInput.addClass('dirty');
   if(!email.match(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i)) {
     emailIssuesTracker.add('Please enter a valid email adddress');
   }
   var emailInputIssues = emailIssuesTracker.retrieve();
-  if (emailInputIssues !== '') {
-    $('#email').addClass('valid');
+  if (emailInputIssues === '') {
+    emailInput.addClass('valid');
+    emailInput.removeClass('invalid');
   }
   else {
-    $('#email').addClass('invalid');
+    emailInput.addClass('invalid');
+    emailInput.removeClass('vaild');
   }
-  emailInput.setCustomValidity(emailInputIssues);
-
-
+  document.querySelector('#email').setCustomValidity(emailInputIssues);
 });
 
-firstPasswordInput.addEventListener('change', function(){
+firstPasswordInput.on('change', function(){
   'use strict';
-  var firstPassword = firstPasswordInput.value;
+  var firstPassword = firstPasswordInput.val();
   var firstInputIssuesTracker = new IssueTracker();
-  $('#first').addClass('dirty');
-
+  firstPasswordInput.addClass('dirty');
     if (firstPassword.length < 6) {
       firstInputIssuesTracker.add('fewer than 6 characters');
     } else if (firstPassword.length > 100) {
@@ -161,59 +185,36 @@ firstPasswordInput.addEventListener('change', function(){
       });
     }
     var firstInputIssues = firstInputIssuesTracker.retrieve();
-    if (firstInputIssues !== '') {
-      $('#first').addClass('valid');
+    if (firstInputIssues === '') {
+      firstPasswordInput.addClass('valid');
+      firstPasswordInput.removeClass('invalid');
     }
     else {
-      $('#first').addClass('invalid');
+      firstPasswordInput.addClass('invalid');
+      firstPasswordInput.removeClass('valid');
     }
-    firstPasswordInput.setCustomValidity(firstInputIssues);
+    document.querySelector('#first').setCustomValidity(firstInputIssues);
 });
 
-secondPasswordInput.addEventListener('change', function(){
+secondPasswordInput.on('change', function(){
   'use strict';
-  var secondPassword = secondPasswordInput.value;
-  var firstPassword = firstPasswordInput.value;
+  var secondPassword = secondPasswordInput.val();
+  var firstPassword = firstPasswordInput.val();
   var secondInputIssuesTracker = new IssueTracker();
-  $('#second').addClass('dirty');
+  secondPasswordInput.addClass('dirty');
   if (firstPassword === secondPassword && firstPassword.length > 0) {
-    /*
-    They match, so make sure the rest of the requirements have been met.
-     */
   } else {
     secondInputIssuesTracker.add('Passwords must match!');
   }
   var secondInputIssues = secondInputIssuesTracker.retrieve();
-  if (secondInputIssues !== '') {
-    $('#second').addClass('valid');
+  if (secondInputIssues === '') {
+    secondPasswordInput.addClass('valid');
+    secondPasswordInput.removeClass('invalid');
   }
   else {
-    $('#second').addClass('invalid');
+    secondPasswordInput.addClass('invalid');
+    secondPasswordInput.removeClass('valid');
   }
-  secondPasswordInput.setCustomValidity(secondInputIssues);
-
+  document.querySelector('#second').setCustomValidity(secondInputIssues);
 });
 
-var model = {
-  events: [
-
-  ]
-};
-
-var controler = {
-  init: function() {
-    'use strict';
-      model.events = JSON.parse(localStorage.getItem('events'));
-  },
-
-  getEvents: function() {
-    'use strict';
-      return model.events;
-  },
-
-  addNewEvent: function(event) {
-    'use strict';
-      model.events.push(event);
-      localStorage.setItem('events', JSON.stringify(model.events));
-  }
-};
