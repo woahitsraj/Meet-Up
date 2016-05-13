@@ -1,9 +1,7 @@
 /*global $:true*/
 /*eslint no-undef: "error"*/
 var model = {
-  events: [
-
-  ]
+  events: []
 };
 
 var controler = {
@@ -19,6 +17,7 @@ var controler = {
 
   addNewEvent: function(event) {
     'use strict';
+      model.events = model.events || [];
       model.events.push(event);
       localStorage.setItem('events', JSON.stringify(model.events));
   }
@@ -48,7 +47,6 @@ var eventCreateView = {
         $('#eventEnd').addClass('invalid');
       }
       document.querySelector('#eventEnd').setCustomValidity(dateInputIssues);
-
     };
     eventEndDate.on('change', eventValidation);
     eventStarDate.on('change', eventValidation);
