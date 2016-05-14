@@ -216,3 +216,23 @@ secondPasswordInput.on('change', function(){
   document.querySelector('#second').setCustomValidity(secondInputIssues);
 });
 
+
+$('input[required]').on('blur',function(){
+  'use strict';
+  $(this).addClass('dirty');
+  if ($(this).val() === '') {
+    $(this).addClass('invalid');
+    $(this).removeClass('valid');
+  }
+  else {
+    $(this).addClass('valid');
+    $(this).removeClass('invalid');
+  }
+});
+
+
+
+
+
+
+
