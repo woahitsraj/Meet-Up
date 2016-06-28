@@ -19,9 +19,15 @@ $ gulp serve
 
 
 ##Built using:
+
 Javascript
+
 HTML5
+
 CSS3  
+
 Gulp
+
 BootStrap 3 
+
 JQuery
